@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-lcrypto -lssl -fopenmp
 OPTIMIZE=-O2
-BUG=-g -pg
+BUG=-g -pg -O0
 
 hash:
 	$(CC) main.c $(CFLAGS) $(OPTIMIZE) -o bin/main
