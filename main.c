@@ -49,35 +49,27 @@ int main(int argc, char *argv[]) {
     printf("Levi miner v: %i.%i.%i\n", MAJ_VERSION, MIN_VERSION, PAT_VERSION);
     printf("Miner starting...\n\n");
 
-    #pragma omp parallel shared(input, i, start_time) private(sha_result, hex, check_result)
-    {
-        for(i=0; i<9223372036854775807; i++) {
-            combine(part_one, i, input);        // Combine part_one with i
-            size_t len = strlen(input);         // length of input
-            hash(len, input, sha_result);       // get the SHA512 hash
-            to_hex(sha_result, hex);            // convert sha result to hex
-            
-            // check for the pattern
-            check_result = check_hash(hex, pattern);
-            
-            if(check_result) {
-                printf("Iteration:\t%lli\n", i);
-                printf("Hash:\t%s\n", hex);
+    #pragma omp parallel for private(sha_result, hex, check_result)
+    for(i=0; i<9223372036854775807; i++) {
+        combine(part_one, i, input);        // Combine part_one with i
+        size_t len = strlen(input);         // length of input
+        hash(len, input, sha_result);       // get the SHA512 hash
+        to_hex(sha_result, hex);            // convert sha result to hex
+        
+        // check for the pattern
+        check_result = check_hash(hex, pattern);
+        
+        if(check_result) {
+            printf("Iteration:\t%lli\n", i);
+            printf("Hash:\t%s\n", hex);
 
-                // Success. Found it. Break. Dance.
-                exit(1);
-            }
+            // Success. Found it. Break. Dance.
+            exit(1);
+        }
 
-            #pragma omp master
-            {
-                // Only show it every so often
-                if(i % 1000000 == 0) {
-                    strcpy(s_hex, hex);         // Copy hex string
-                    s_hex[10] = '\0';           // trim copied hex
-                    printf("%s\t", s_hex);      // output short version
-                    hash_rate(start_time, i);   // show hash rate
-                }
-            }
+        if(i % 1000000 == 0) {
+            printf("%s\n", hex);      // output short version
+            //hash_rate(start_time, i);   // show hash rate
         }
     }
     
