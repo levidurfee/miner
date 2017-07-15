@@ -1,19 +1,18 @@
 /*L****************************************************************************
-*  FILENAME:    hash.c                                          VERSION: 0.6.0
+*  FILENAME:    hash.c                                          VERSION: 0.7.0
 *
 *  DESCRIPTION: SHA512 Miner example
 *
-*  AUTHOR:      Levi Durfee                                     DATE: 20170714
+*  AUTHOR:      Levi Durfee                                     DATE: 20170715
 *
 *  CHANGES
 *  ----------------------------------------------------------------------------
 *  REF NO       VERSION     DATE        WHO     NOTES
+*  00003a       0.7.0       20170715    LD      Use arguments
 *  00002b       0.6.0       20170714    LD      Split it up into multiple files
 *  00002a       0.5.0       20170714    LD      OpenMP
 *  00001a       0.4.0       20170712    LD      Updated int to long long
 *  00000c       0.3.0       20170711    LD      Redid it
-*  00000b       0.2.0       20170710    LD      Redid it..
-*  00000a       0.1.0       20170709    LD      Started
 * 
 ******************************************************************************/
 
@@ -26,11 +25,10 @@
 int main(int argc, char *argv[]) {
     
     if(argc != 3) {
-        printf("Usage: %s input pattern", argv[0]);
+        printf("Usage: %s input pattern\n", argv[0]);
         exit(0);
     }
 
-    // Config settings - change these to be args from cli
     char part_one[MIN_SIZE];
     char pattern[MIN_SIZE];
 
@@ -48,6 +46,7 @@ int main(int argc, char *argv[]) {
 
     start_time = time(NULL);
 
+    printf("Levi miner v: %i.%i.%i\n", MAJ_VERSION, MIN_VERSION, PAT_VERSION);
     printf("Miner starting...\n\n");
 
     #pragma omp parallel shared(input, i, start_time) private(sha_result, hex, check_result)

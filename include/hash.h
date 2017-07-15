@@ -1,13 +1,13 @@
 #ifndef HASH_C
 #define HASH_C
 
-#define MIN_SIZE          16
-#define LOW_SIZE          64
-#define MID_SIZE         128
-#define MAX_SIZE         256
-#define MAJ_VERSION     0x30
-#define MIN_VERSION     0x36
-#define PAT_VERSION     0x30
+#define MIN_SIZE     16
+#define LOW_SIZE     64
+#define MID_SIZE    128
+#define MAX_SIZE	256
+#define MAJ_VERSION	  0
+#define MIN_VERSION   7
+#define PAT_VERSION   0
 
 #include <time.h>
 #include <stdio.h>
