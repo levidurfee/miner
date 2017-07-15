@@ -26,7 +26,7 @@
 int main(void) {
     // Config settings - change these to be args from cli
     char part_one[MIN_SIZE] = "Levi";           // part one of input
-    char pattern[MIN_SIZE]  = "000000000000";   // end of hash target
+    char pattern[MIN_SIZE]  = "0000000";
 
     // -------------------------------- //
     
