@@ -24,11 +24,18 @@
 #include "include/hash.c"
 
 int main(int argc, char *argv[]) {
-    // Config settings - change these to be args from cli
-    char part_one[MIN_SIZE] = "Levi";           // part one of input
-    char pattern[MIN_SIZE]  = "000000";
+    
+    if(argc != 3) {
+        printf("Usage: %s input pattern", argv[0]);
+        exit(0);
+    }
 
-    // -------------------------------- //
+    // Config settings - change these to be args from cli
+    char part_one[MIN_SIZE];
+    char pattern[MIN_SIZE];
+
+    strcpy(part_one, argv[1]);
+    strcpy(pattern, argv[2]);
     
     char input[MIN_SIZE];                       // variable for combined input
     int  start_time;                            // epoch when started
@@ -40,6 +47,9 @@ int main(int argc, char *argv[]) {
     long long int i;                            // nonce/iterator
 
     start_time = time(NULL);
+
+    printf("Miner starting...\n\n");
+
     #pragma omp parallel shared(input, i, start_time) private(sha_result, hex, check_result)
     {
         for(i=0; i<9223372036854775807; i++) {
