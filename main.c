@@ -21,7 +21,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
-#include "hash.c"
+#include "include/hash.c"
 
 int main(void) {
     // Config settings - change these to be args from cli
