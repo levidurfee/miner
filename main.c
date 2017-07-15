@@ -23,10 +23,10 @@
 #include <string.h>
 #include "include/hash.c"
 
-int main(void) {
+int main(int argc, char *argv[]) {
     // Config settings - change these to be args from cli
     char part_one[MIN_SIZE] = "Levi";           // part one of input
-    char pattern[MIN_SIZE]  = "0000000";
+    char pattern[MIN_SIZE]  = "000000";
 
     // -------------------------------- //
     
