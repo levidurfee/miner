@@ -50,6 +50,7 @@ int main(int argc, char *argv[]) {
             printf("Success: Found it!\n");
             printf("It took %i seconds.\n", duration);
             printf("%s\n", hex_output);
+            printf("Input: %s\n", part_one);
             printf("Nonce  : %lli\n", iteration);
             exit(1);
         }
