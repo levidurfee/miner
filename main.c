@@ -22,7 +22,8 @@ int main(int argc, char *argv[]) {
 
     long long int iteration;
 
-    for(iteration=0; iteration<1000; iteration++) {
+    #pragma omp parallel for private(hash_result, hex_result, check_result, hash_output, hex_output)
+    for(iteration=0; iteration<9223372036854775800; iteration++) {
         combine(part_one, iteration, input);
 
         hash_result = get_hash(input, hash_output, strlen(input));
@@ -40,10 +41,12 @@ int main(int argc, char *argv[]) {
         check_result = check_hash(hex_output, pattern);
         if(check_result == 1) {
             printf("Success: Found it!\n");
+            printf("Nonce  : %lli\n", iteration);
             exit(1);
         }
 
-        printf("%s\n", hex_output);
+        printf(".");
+        //printf("%s\n", hex_output);
 
     }
     
