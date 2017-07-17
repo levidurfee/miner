@@ -21,8 +21,13 @@ int main(int argc, char *argv[]) {
     int hash_result, hex_result, check_result;
 
     long long int iteration;
+    long long int progress = 0;
+    
+    int start_time = time(NULL);
+    int now, duration;
+    int hash_rate;
 
-    #pragma omp parallel for private(hash_result, hex_result, check_result, hash_output, hex_output)
+    #pragma omp parallel for private(hash_result, hex_result, check_result, hash_output, hex_output) num_threads(4)
     for(iteration=0; iteration<9223372036854775800; iteration++) {
         combine(part_one, iteration, input);
 
@@ -41,12 +46,22 @@ int main(int argc, char *argv[]) {
         check_result = check_hash(hex_output, pattern);
         if(check_result == 1) {
             printf("Success: Found it!\n");
+            printf("%s\n", hex_output);
             printf("Nonce  : %lli\n", iteration);
             exit(1);
         }
 
-        printf(".");
-        //printf("%s\n", hex_output);
+        progress++;
+        if(progress > 0 && progress % 100000 == 0) {
+            printf("%lli\n", progress);
+            printf("%s\n", hex_output);
+            now = time(NULL);
+            duration = now - start_time;
+            if(duration > 0) {
+                hash_rate = progress / duration;
+                printf("%ih/s\n", hash_rate);    
+            }
+        }
 
     }
     
