@@ -45,16 +45,19 @@ int main(int argc, char *argv[]) {
 
         check_result = check_hash(hex_output, pattern);
         if(check_result == 1) {
+            now = time(NULL);
+            duration = now - start_time;
             printf("Success: Found it!\n");
+            printf("It took %i seconds.\n", duration);
             printf("%s\n", hex_output);
             printf("Nonce  : %lli\n", iteration);
             exit(1);
         }
 
         progress++;
-        if(progress > 0 && progress % 100000 == 0) {
-            printf("%lli\n", progress);
-            printf("%s\n", hex_output);
+        if(progress > 0 && progress % 1000000 == 0) {
+            //printf("%lli\n", progress);
+            //printf("%s\n", hex_output);
             now = time(NULL);
             duration = now - start_time;
             if(duration > 0) {
