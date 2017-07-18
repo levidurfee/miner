@@ -4,10 +4,10 @@ OPTIMIZE=-O2
 BUG=-g -pg -O0
 
 hash:
-	$(CC) main.c $(CFLAGS) $(OPTIMIZE) -o bin/main
+	$(CC) ./src/main.c $(CFLAGS) $(OPTIMIZE) -o ./build/main
 
 debug:
-	$(CC) main.c $(CFLAGS) $(BUG) -o bin/main
+	$(CC) ./src/main.c $(CFLAGS) $(BUG) -o ./build/main
 
 clean:
-	rm -Rf bin/*
+	rm -Rf ./build/*
