@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
-#include "include/miner.c"
+#include "miner.c"
 
 int main(int argc, char *argv[]) {
 
