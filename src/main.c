@@ -64,7 +64,8 @@ int main(int argc, char *argv[]) {
             duration = now - start_time;
             if(duration > 0) {
                 hash_rate = progress / duration;
-                printf(" [%i] [%lli] [%ih/s]\r", duration, progress, hash_rate);   
+                printf(" [%i] [%lli] [%ih/s]\r", duration, progress, hash_rate);
+                printf(" %s\r", hex_output);
                 fflush(stdout); 
             }
         }
