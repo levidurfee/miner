@@ -1,12 +1,6 @@
 #ifndef LEVI_MINER
 #define LEVI_MINER
 
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <openssl/sha.h>
-
 #define MIN_SIZE    16
 #define LOW_SIZE    64
 #define MID_SIZE    128
