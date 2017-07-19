@@ -8,7 +8,7 @@
 int main(int argc, char *argv[]) {
 
     char part_one[MIN_SIZE];
-    char pattern[MIN_SIZE];
+    char pattern[MID_SIZE];
 
     strcpy(part_one, argv[1]);
     strcpy(pattern, argv[2]);
