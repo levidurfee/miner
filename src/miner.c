@@ -1,5 +1,3 @@
-#include "miner.h"
-
 int get_hash(char input[MIN_SIZE], char output[MID_SIZE], size_t len) {
     unsigned char md[LOW_SIZE];         // message digest
     unsigned char message[LOW_SIZE];    // OpenSSL SHA512 requires unsigned char
