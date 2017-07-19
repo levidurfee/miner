@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <openssl/sha.h>
+#include "miner.h"
 
 int get_hash(char input[MIN_SIZE], char output[MID_SIZE], size_t len) {
     unsigned char md[LOW_SIZE];         // message digest
