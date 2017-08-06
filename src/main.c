@@ -7,11 +7,14 @@
 
 int main(int argc, char *argv[]) {
 
-    char part_one[MIN_SIZE];
+    char part_one[MAX_SIZE];
     char pattern[MID_SIZE];
 
     strcpy(part_one, argv[1]);
     strcpy(pattern, argv[2]);
+
+    //printf("%s\n", part_one);
+    //exit(0);
 
     printf("Miner starting...\n\n");
 
@@ -42,7 +45,7 @@ int main(int argc, char *argv[]) {
         if(hex_result == 1) {
             now = time(NULL);
             duration = now - start_time;
-            printf("\n\nSuccess: Found it!\n");
+            printf("Success: Found it!\n");
             printf("It took %i seconds.\n", duration);
             printf("Input: %s\n", part_one);
             printf("Nonce  : %lli\n", iteration);
