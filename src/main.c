@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     //printf("%s\n", part_one);
     //exit(0);
 
-    printf("Miner starting...\n\n");
+    //printf("Miner starting...\n\n");
 
     char input[MID_SIZE];
     char hash_output[MID_SIZE];
@@ -45,10 +45,12 @@ int main(int argc, char *argv[]) {
         if(hex_result == 1) {
             now = time(NULL);
             duration = now - start_time;
-            printf("Success: Found it!\n");
-            printf("It took %i seconds.\n", duration);
-            printf("Input: %s\n", part_one);
-            printf("Nonce  : %lli\n", iteration);
+            //printf("Success: Found it!\n");
+            //printf("It took %i seconds.\n", duration);
+            //printf("Input: %s\n", part_one);
+            printf("%lli\n", iteration);
+            hex(hash_output, hex_output);
+            printf("%s\n", hex_output);
             exit(1);
         }
 
@@ -60,8 +62,8 @@ int main(int argc, char *argv[]) {
             duration = now - start_time;
             if(duration > 0) {
                 hash_rate = progress / duration;
-                printf(" [%i] [%lli] [%ih/s]\r", duration, progress, hash_rate);
-                fflush(stdout); 
+                //printf(" [%i] [%lli] [%ih/s]\r", duration, progress, hash_rate);
+                //fflush(stdout); 
             }
         }
 

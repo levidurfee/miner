@@ -1,17 +1,28 @@
 <?php
 
-$data = "levi";
-$nonces = getChainData();
+$start = "levidurfee";
 $hash = "";
+$difficulty = 4;
 
-for($i=0; $i<count($nonces); $i++) {
-	$next = $data . $hash . $nonces[$i];
-	$hash = strtoupper(hash('sha512', $next));
-	echo $hash . "\n";
+for($i=0; $i<5; $i++) {
+	$output = [];
+	$zs = getZeroes($difficulty);
+	$seed = $start . time();
+	$run = "./build/main " . $seed.$hash . " " . $zs;
+	exec($run, $output);
+	$nonce = $output[0];
+	$hash = $output[1];
+	echo $i .' '. $hash . "\n";
+	if($i % 200 == 0) {
+		$difficulty++;
+	}
+	file_put_contents('output.txt', $seed .','. $nonce . ',' . $hash . "\n", FILE_APPEND);
 }
 
-function getChainData($filename = 'chain.txt') {
-	$raw = file_get_contents($filename);
-	$lines = explode("\n", $raw);
-	return $lines;
+function getZeroes($num) {
+	$z = "";
+	for($i=0; $i<$num; $i++) {
+		$z .= "0";
+	}
+	return $z;
 }
