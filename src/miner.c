@@ -16,7 +16,7 @@ int get_hash(char input[MIN_SIZE], char output[MID_SIZE], size_t len) {
     return 1;
 }
 
-int get_hex(char *input, char *output) {
+int get_hex(char *input, char pattern[MID_SIZE]) {
     int digit;
     char *src_p, *buffer_p, *buffer_end_p;
     char buffer[MAX_SIZE];
@@ -25,12 +25,41 @@ int get_hex(char *input, char *output) {
     buffer_end_p = &buffer[MAX_SIZE - 2];
     src_p = input;
     int i;
+
+    int j = 0;
+    int p_size = strlen(pattern);
+    int p_cnt = 0;
+    int t;
     for(i=0; i<SHA512_DIGEST_LENGTH; i++) {
         digit = (*src_p >> 4) & 0xf;
         *buffer_p++ = ( digit > 9 ) ? digit + 'a' - 10 : digit + '0';
+        t = pattern[j] - '0';
+        if(digit == t) {
+            //printf("m1 [digit:%i\t pattern:%c]\n", digit, pattern[j]);
+            p_cnt++;
+        }
+
+        if(p_cnt >= p_size) {
+            //printf("p_cnt: %i\tp_size: %i\n", p_cnt, p_size);
+            return 1;
+        }
 
         digit = *src_p & 0xf;
         *buffer_p++ = ( digit > 9 ) ? digit + 'a' - 10 : digit + '0';
+        t = pattern[j+1] - '0';
+        if(digit == t) {
+            //printf("m2 [digit:%i\t pattern:%c]\n", digit, pattern[j]);
+            p_cnt++;
+        } else {
+            return 0;
+        }
+
+        if(p_cnt >= p_size) {
+            //printf("p_cnt: %i\tp_size: %i\n", p_cnt, p_size);
+            return 1;
+        }
+
+        j = j + 2;
 
         // safety net
         if(buffer_p >= buffer_end_p) {
@@ -38,26 +67,11 @@ int get_hex(char *input, char *output) {
         }
 
         src_p++;
-    }
 
-    *buffer_p = '\0';                   // NUL terminate the string
-
-    strcpy(output, buffer);
-
-    return 1;
-}
-
-int check_hash(char hash[MID_SIZE], char pattern[MID_SIZE]) {
-    int j, i;
-    int start = MID_SIZE - strlen(pattern);
-
-    for(j=start, i=0; j<MID_SIZE; j++, i++) {
-        if(hash[j] != pattern[i]) {
+        if(i > p_size) {
             return 0;
         }
     }
-
-    return 1;
 }
 
 int combine(char input_one[MIN_SIZE], long long int input_two, char input[MIN_SIZE]) {
